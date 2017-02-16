@@ -5,19 +5,47 @@
 -- countrycode is 'USA', and population of 45001. (Yes, I looked it up on 
 -- Wikipedia.)
 
+INSERT INTO city (name, countrycode, district, population)  
+VALUES ('Smallville', 'USA', 'Kansas', 45001);
+
 -- 2. Add Kryptonese to the countrylanguage table. Kryptonese is spoken by 0.0001
 -- percentage of the 'USA' population.
+
+INSERT INTO city (countrycode, language, isofficial, percentage)  
+VALUES ('USA', 'Kryptonese', 'false', 0.0001);
 
 -- 3. After heated debate, "Kryptonese" was renamed to "Krypto-babble", change 
 -- the appropriate record accordingly.
 
+UPDATE countrylanguage
+SET language='Krypto-babble'
+WHERE language='Kryptonese';
+
 -- 4. Set the US captial to Smallville, Kansas in the country table.
+
+update country
+set capital = 4080
+where code = 'USA'
 
 -- 5. Delete Smallville, Kansas from the city table. (Did it succeed? Why?)
 
+DELETE FROM city
+WHERE id = 4080;
+
+-- Doesn't work because Smallville is being used in the country table
+
 -- 6. Return the US captial to Washington.
 
+update country
+set capital = 3813
+where code = 'USA'
+
 -- 7. Delete Smallville, Kansas from the city table. (Did it succeed? Why?)
+
+DELETE FROM city
+WHERE id = 4080;
+
+-- It worked because smallville was not being used in any other table.
 
 -- 8. Reverse the "is the official language" setting for all languages where the
 -- country's year of independence is within the range of 1800 and 1972 
